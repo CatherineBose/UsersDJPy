@@ -1,0 +1,146 @@
+catherines-MacBook-Pro:userdDJPy catherinebose$ ls
+apps            db.sqlite3      manage.py       python          userdDJPy
+catherines-MacBook-Pro:userdDJPy catherinebose$ python manage.py shell
+Traceback (most recent call last):
+  File "manage.py", line 17, in <module>
+    "Couldn't import Django. Are you sure it's installed and "
+ImportError: Couldn't import Django. Are you sure it's installed and available on your PYTHONPATH environment variable? Did you forget to activate a virtual environment?
+catherines-MacBook-Pro:userdDJPy catherinebose$ cd ..
+catherines-MacBook-Pro:django_Intro catherinebose$ cd ..
+catherines-MacBook-Pro:PythonDojo catherinebose$ ls
+PythonFundamentalsAssignments   TypeList                        flask_mysql
+PythonOOP                       django_Intro                    myEnvironments
+SQL                             flask
+catherines-MacBook-Pro:PythonDojo catherinebose$ cd myEnvironments/
+catherines-MacBook-Pro:myEnvironments catherinebose$ cd djangoEnv/
+catherines-MacBook-Pro:djangoEnv catherinebose$ cd bin
+catherines-MacBook-Pro:bin catherinebose$ source activate
+(djangoEnv) catherines-MacBook-Pro:bin catherinebose$ cd ../..
+(djangoEnv) catherines-MacBook-Pro:myEnvironments catherinebose$ ls
+djangoEnv       flaskEnv
+(djangoEnv) catherines-MacBook-Pro:myEnvironments catherinebose$ cd ..
+(djangoEnv) catherines-MacBook-Pro:PythonDojo catherinebose$ ls
+PythonFundamentalsAssignments   TypeList                        flask_mysql
+PythonOOP                       django_Intro                    myEnvironments
+SQL                             flask
+(djangoEnv) catherines-MacBook-Pro:PythonDojo catherinebose$ cd django_Intro/
+(djangoEnv) catherines-MacBook-Pro:django_Intro catherinebose$ ls
+App                     main                    randomWordGeneratorDjPy
+blogsApp                notesDjango             timeDisplayDjPy
+helloworld              randomNumberDjPy        userdDJPy
+(djangoEnv) catherines-MacBook-Pro:django_Intro catherinebose$ cd userdDJPy/
+(djangoEnv) catherines-MacBook-Pro:userdDJPy catherinebose$ ls
+apps            db.sqlite3      manage.py       python          userdDJPy
+(djangoEnv) catherines-MacBook-Pro:userdDJPy catherinebose$ python manage.py shell
+Python 2.7.14 (default, Sep 25 2017, 09:53:22)
+[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.37)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.userApp.models import *
+>>> User.objects.all()
+<QuerySet []>
+>>> User.objects.create(first_name="Anna",last_name="Propas",email="anna@gmail.com", age= 25)
+<User: User object>
+>>> User.objects.all()
+<QuerySet [<User: User object>]>
+>>> User.objects.create(first_name="Chris",last_name="gale",email="asaa@gmail.com", age= 35)
+<User: User object>
+>>> User.objects.create(first_name="Samantha",last_name="Sanders",email="asaa@gmail.com", age= 45)
+<User: User object>
+>>> User.objects.all()
+<QuerySet [<User: User object>, <User: User object>, <User: User object>]>
+>>> b= User.objects.first()
+>>> b.first_name
+u'Anna'
+>>> b= User.objects.last()
+>>> b.first_name
+u'Samantha'
+>>> c= User.objects.last()
+>>> b= User.objects.first()
+>>> b.first_name
+u'Anna'
+>>> c.first_name
+u'Samantha'
+>>> User.objects.count()
+3
+>>> c.value
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'User' object has no attribute 'value'
+>>> d = User.objects.get(id=3)
+>>> d.first_name
+u'Samantha'
+>>> d.last__name = 'Stewart'
+>>> d.last_name
+u'Sanders'
+>>> d.save()
+>>> d.last_name
+u'Sanders'
+>>> d.last__name = 'Martha'
+>>> d.save()
+>>> d.last_name
+u'Sanders'
+>>> d.last__name = "Martha"
+>>> d.save()
+>>> d.last_name
+u'Sanders'
+>>> d.last_name
+u'Sanders'
+>>> d.last_name = "Mary"
+>>> d.save()
+>>> d.last_name
+'Mary'
+>>>
+(djangoEnv) catherines-MacBook-Pro:userdDJPy catherinebose$ python manage.py shell
+Python 2.7.14 (default, Sep 25 2017, 09:53:22)
+[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.37)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.userApp.models import *
+>>> User.objects.get(id=3)
+<User object: Samantha Mary asaa@gmail.com 45>
+>>> User.objects.order_by("first_name")
+<QuerySet [<User object: Anna Propas anna@gmail.com 25>, <User object: Chris gale asaa@gmail.com 35>, <User object: Samantha Mary asaa@gmail.com 45>]>
+>>> User.objects.order_by("-first_name")
+<QuerySet [<User object: Samantha Mary asaa@gmail.com 45>, <User object: Chris gale asaa@gmail.com 35>,<User object: Anna Propas anna@gmail.com 25>]>
+>>> User.objects.create(first_name="Brenda",last_name="Cole",email="brenda@gmail.com", age= 25)
+<User object: Brenda Cole brenda@gmail.com 25>
+>>> User.objects.get(id=4)
+<User object: Brenda Cole brenda@gmail.com 25>
+>>> e=User.objects.get(id=4)
+>>> e.delete()
+(1, {u'userApp.User': 1})
+>>>  User.objects.all()
+  File "<console>", line 1
+    User.objects.all()
+    ^
+IndentationError: unexpected indent
+>>> User.objects.all()
+<QuerySet [<User object: Anna Propas anna@gmail.com 25>, <User object: Chris gale asaa@gmail.com 35>, <User object: Samantha Mary asaa@gmail.com 45>]>
+>>> User.objects.create(first_name="Brenda",last_name="Cole",email="brenda@gmail.com", age= 25)
+<User object: Brenda Cole brenda@gmail.com 25>
+>>> User.objects.all()
+<QuerySet [<User object: Anna Propas anna@gmail.com 25>, <User object: Chris gale asaa@gmail.com 35>, <User object: Samantha Mary asaa@gmail.com 45>, <User object: Brenda Cole brenda@gmail.com 25>]>
+>>> User.objects.get(id=4).delete()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/Users/catherinebose/Desktop/CodingDojo/PythonDojo/myEnvironments/djangoEnv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/catherinebose/Desktop/CodingDojo/PythonDojo/myEnvironments/djangoEnv/lib/python2.7/site-packages/django/db/models/query.py", line 385, in get
+    self.model._meta.object_name
+DoesNotExist: User matching query does not exist.
+>>> User.objects.get(id=4)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/Users/catherinebose/Desktop/CodingDojo/PythonDojo/myEnvironments/djangoEnv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/catherinebose/Desktop/CodingDojo/PythonDojo/myEnvironments/djangoEnv/lib/python2.7/site-packages/django/db/models/query.py", line 385, in get
+    self.model._meta.object_name
+DoesNotExist: User matching query does not exist.
+>>> User.objects.get(id=3)
+<User object: Samantha Mary asaa@gmail.com 45>
+>>> User.objects.get(id=3).delete()
+(1, {u'userApp.User': 1})
+>>> User.objects.all()
+<QuerySet [<User object: Anna Propas anna@gmail.com 25>, <User object: Chris gale asaa@gmail.com 35>, <User object: Brenda Cole brenda@gmail.com 25>]>
+>>>
